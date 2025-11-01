@@ -116,7 +116,7 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig = {
   enable: true,
   twikoo: {
-    envId: 'https://twikoo.phb1og.fun',
+    envId: 'https://twikoo.phb1og.fun/',
     region: '', // 选填
   },
 };

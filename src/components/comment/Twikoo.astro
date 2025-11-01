@@ -15,34 +15,38 @@ const config = {
     const commentContainer = document.getElementById('comment');
     if (!commentContainer) return;
 
-    // 清理旧的 Twikoo 实例和脚本
     if (window.twikoo) {
-      window.twikoo = undefined;
-    }
-    const oldScript = document.getElementById('twikoo-script');
-    if (oldScript) {
-      oldScript.remove();
+      window.twikoo.init({
+        ...config,
+        envId: "https://twikoo.phb1og.fun",
+        lang: 'zh-TW',
+      });
+      return;
     }
 
-    // 创建并注入新的 Twikoo 脚本
     const script = document.createElement('script');
     script.id = 'twikoo-script';
-    script.src = '/twikoo/twikoo.all.min.js'; // 确保路径正确
+    script.src = '/twikoo/twikoo.all.min.js';
     script.defer = true;
 
-    // 脚本加载后初始化 Twikoo
     script.onload = () => {
-      if (window.twikoo) {
-        window.twikoo.init({
-          ...config,
-          envId: "https://twikoo.phb1og.fun",
-          lang: 'zh-TW',
-        });
-      }
+      window.twikoo?.init({
+        ...config,
+        envId: "https://twikoo.phb1og.fun",
+        lang: 'zh-TW',
+      });
     };
+
     document.head.appendChild(script);
   }
 
-  // 监听 Astro 的页面加载事件来初始化评论
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTwikoo);
+  } else {
+    initTwikoo(); // 已加载完成，直接执行
+  }
+
+ 
   document.addEventListener('astro:page-load', initTwikoo);
 </script>
