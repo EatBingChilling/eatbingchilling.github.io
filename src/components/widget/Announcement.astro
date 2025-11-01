@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon/components";
+import { announcementConfig } from "../../config";
+import { url } from "../../utils/url-utils";
+
+const config = announcementConfig;
+---
+{config.enabled && (
+<div class="card-base p-4 mb-4">
+    <div class="flex items-start gap-3">
+        <div class="flex-shrink-0 mt-1">
+            <div class="w-8 h-8 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center">
+                <Icon name="material-symbols:campaign-outline-rounded" class="text-[1.25rem] text-[var(--primary)]"></Icon>
+            </div>
+        </div>
+        <div class="flex-1 min-w-0">
+            <h3 class="text-base font-bold text-90 mb-2">{config.title}</h3>
+            <p class="text-sm text-75 mb-3 whitespace-pre-line">{config.content}</p>
+            {config.button.enabled && (
+                <a 
+                    href={config.button.url.startsWith('http') ? config.button.url : url(config.button.url)} 
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)] active:scale-95 transition text-sm font-medium text-90"
+                >
+                    <span>{config.button.text}</span>
+                    <Icon name="material-symbols:arrow-forward-rounded" class="text-[1rem]"></Icon>
+                </a>
+            )}
+        </div>
+    </div>
+</div>
+)}
+

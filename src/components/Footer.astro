@@ -1,0 +1,77 @@
+---
+// src/components/Footer.astro (或者你的布局文件)
+import { profileConfig } from "../config";
+import { url } from "../utils/url-utils";
+
+const currentYear = new Date().getFullYear();
+---
+
+<!-- 
+  确保下面的 HTML 结构在你的页脚组件中，
+  并且在桌面和移动端视图下都会被渲染！
+  你需要检查你的代码，确保没有使用 md:hidden 或类似的类把它在移动端隐藏掉。
+-->
+<div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
+
+<div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6 py-4"> <!-- 建议加个py-4 padding -->
+    <!-- 原有信息 -->
+    <div class="transition text-50 text-sm text-center">
+        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+    </div>
+
+    <!-- 运行时间 -->
+    <div class="transition text-50 text-sm text-center mt-2">
+        <span id="runningtime"> </span>
+    </div>
+</div>
+
+<script is:inline>
+  function setupRunningTime() {
+    if (window.runningTimer) {
+      clearInterval(window.runningTimer);
+    }
+
+    // 再次确认元素存在，这是关键
+    const el = document.getElementById('runningtime');
+    if (!el) {
+      // 如果元素在当前视图不存在，就什么也不做
+      return; 
+    }
+
+    const start = new Date('2025-08-30T08:00:00');
+
+    if (start.getTime() > Date.now()) {
+      el.textContent = `本站将于 ${start.toLocaleDateString()} 上线`;
+      return;
+    }
+
+    const pad = (n) => n.toString().padStart(2, '0');
+
+    const update = () => {
+      // 在更新时也检查元素是否存在，防止页面导航到没有该元素的页面后脚本报错
+      const currentEl = document.getElementById('runningtime');
+      if (!currentEl) {
+        clearInterval(window.runningTimer);
+        return;
+      }
+      const diff = Math.floor((Date.now() - start.getTime()) / 1000);
+      const d = Math.floor(diff / 86400);
+      const h = Math.floor((diff % 86400) / 3600);
+      const m = Math.floor((diff % 3600) / 60);
+      const s = diff % 60;
+      currentEl.textContent = `本站已运行: ${d} 天 ${pad(h)} 小时 ${pad(m)} 分钟 ${pad(s)} 秒`;
+    };
+
+    update();
+    window.runningTimer = setInterval(update, 1000);
+  }
+
+  document.addEventListener('astro:page-load', setupRunningTime);
+  // 在初始加载时也调用，确保万无一失
+  setupRunningTime(); 
+</script>
