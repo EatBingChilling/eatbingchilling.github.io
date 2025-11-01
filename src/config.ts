@@ -112,3 +112,12 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
+
+export const commentConfig = {
+  enable: true,
+  twikoo: {
+    envId: 'https://twikoo.phb1og.fun',
+    region: '', // 选填
+  },
+};
+
