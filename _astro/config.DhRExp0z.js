@@ -1,0 +1,2 @@
+var i=(o=>(o[o.Home=0]="Home",o[o.Archive=1]="Archive",o[o.About=2]="About",o[o.Friends=3]="Friends",o))(i||{});const a={lang:"zh_TW"};i.Home,i.Archive,i.About,i.Friends;const n={name:"鳳凰",bio:`「鳳兮鳳兮歸故鄉，遨遊四海求其凰。」
+別名: ImPhoen1x, 小乌龟`},s=[{name:"GitHub",url:"https://github.com/EatBingChilling",icon:"fa6-brands:github"},{name:"哔哩哔哩",url:"https://space.bilibili.com/2129606465",icon:"fa6-brands:bilibili"}],b={theme:"github-dark"};export{s as b,b as e,n as p,a as s};
