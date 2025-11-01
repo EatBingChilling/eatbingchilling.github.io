@@ -150,3 +150,11 @@
     }
   }
 }
+
+
+@font-face {
+  font-family: 'ChillRoundGothic_Medium';
+  src: url('/fonts/ChillRoundGothic_Medium.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}

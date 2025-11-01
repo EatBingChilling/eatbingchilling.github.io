@@ -6,14 +6,9 @@ import { url } from "../utils/url-utils";
 const currentYear = new Date().getFullYear();
 ---
 
-<!-- 
-  确保下面的 HTML 结构在你的页脚组件中，
-  并且在桌面和移动端视图下都会被渲染！
-  你需要检查你的代码，确保没有使用 md:hidden 或类似的类把它在移动端隐藏掉。
--->
 <div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
 
-<div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6 py-4"> <!-- 建议加个py-4 padding -->
+<div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6 py-4">
     <!-- 原有信息 -->
     <div class="transition text-50 text-sm text-center">
         &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
@@ -22,6 +17,13 @@ const currentYear = new Date().getFullYear();
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+    </div>
+
+    <!-- 站点总访问量 -->
+    <div class="transition text-50 text-sm text-center mt-2">
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span> Total Visits
+        </span>
     </div>
 
     <!-- 运行时间 -->
