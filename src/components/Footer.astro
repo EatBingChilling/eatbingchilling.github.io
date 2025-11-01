@@ -1,5 +1,5 @@
 ---
-// src/components/Footer.astro (或者你的布局文件)
+// src/components/Footer.astro
 import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
 
@@ -19,11 +19,10 @@ const currentYear = new Date().getFullYear();
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
     </div>
 
-    <!-- 站点总访问量 -->
+    <!-- VerCount 统计信息 -->
     <div class="transition text-50 text-sm text-center mt-2">
-        <span id="busuanzi_container_site_pv">
-            <span id="busuanzi_value_site_pv"></span> Total Visits
-        </span>
+        Total Visits <span id="vercount_value_site_pv">Loading</span> / 
+        Site Total Visitors <span id="vercount_value_site_uv">Loading</span>
     </div>
 
     <!-- 运行时间 -->
@@ -38,10 +37,8 @@ const currentYear = new Date().getFullYear();
       clearInterval(window.runningTimer);
     }
 
-    // 再次确认元素存在，这是关键
     const el = document.getElementById('runningtime');
     if (!el) {
-      // 如果元素在当前视图不存在，就什么也不做
       return; 
     }
 
@@ -55,7 +52,6 @@ const currentYear = new Date().getFullYear();
     const pad = (n) => n.toString().padStart(2, '0');
 
     const update = () => {
-      // 在更新时也检查元素是否存在，防止页面导航到没有该元素的页面后脚本报错
       const currentEl = document.getElementById('runningtime');
       if (!currentEl) {
         clearInterval(window.runningTimer);
@@ -74,6 +70,5 @@ const currentYear = new Date().getFullYear();
   }
 
   document.addEventListener('astro:page-load', setupRunningTime);
-  // 在初始加载时也调用，确保万无一失
   setupRunningTime(); 
 </script>
