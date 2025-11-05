@@ -151,6 +151,7 @@ sudo pacman -S archlinuxcn-keyring
 直接
 
 ```bash
+sudo pacman -S --needed base-devel
 sudo pacman -S paru
 ```
 
