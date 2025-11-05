@@ -151,7 +151,7 @@ sudo pacman -S archlinuxcn-keyring
 直接
 
 ```bash
-sudo pacman -S yay
+sudo pacman -S paru
 ```
 
 我不推荐修改 `aururl`，官方 aur 源就够用了，而且也只是从 aur 源里下载 PKGBUILD，换源和不换源没啥区别。
